@@ -53,13 +53,42 @@ public class BinarySearchTree {
                 
         }
     }
+    
+    boolean searchNode(int x, Node root){
+        if(root == null || root.val == x)
+            return true;
+        if(x > root.val)
+            searchNode(x, root.right);
+        else
+            searchNode(x, root.left);
+        
+        return false;
+    }
+    
+    void insertNode(int x, Node root){
+        if(x < root.val){
+            if(root.left == null)
+                root.left = new Node(x);
+            else
+                insertNode(x, root.left);
+        } else {
+            if(root.right == null)
+                root.right = new Node(x);
+            else
+                insertNode(x, root.right);
+        }
+    }
 
     private static class Node {
         Node left, right;
         int val;
         public Node() {
         }
-        
+        public Node (int x){
+            val = x;
+            left = null;
+            right = null;
+        }
         public Node(int x, Node left, Node right){
             val = x;
             this.left = left;
