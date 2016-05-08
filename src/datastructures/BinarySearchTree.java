@@ -54,15 +54,15 @@ public class BinarySearchTree {
         }
     }
     
-    boolean searchNode(int x, Node root){
+    Node searchNode(int x, Node root){
         if(root == null || root.val == x)
-            return true;
+            return root;
         if(x > root.val)
             searchNode(x, root.right);
         else
             searchNode(x, root.left);
         
-        return false;
+        return null;
     }
     
     void insertNode(int x, Node root){
@@ -77,6 +77,24 @@ public class BinarySearchTree {
             else
                 insertNode(x, root.right);
         }
+    }
+    
+    int maxdepth(Node root){
+        if(root == null)
+            return 0;
+        int ldepth = maxdepth(root.left);
+        int rdepth = maxdepth(root.right);
+        return 1 + Math.max(ldepth, rdepth);
+    }
+    
+    int mindepth(Node root){
+        if (root == null)
+            return 0;
+        return 1 + Math.min(mindepth(root.left), mindepth(root.right));
+    }
+    
+    boolean isBalanced(Node root){
+        return maxdepth(root)-mindepth(root) <= 1;
     }
 
     private static class Node {
