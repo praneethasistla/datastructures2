@@ -134,6 +134,35 @@ public class BinarySearchTree {
         return left == null ? right: left;
     }
     
+    boolean isSubset(Node bigroot, Node smallroot){
+        /*
+        To check if a tree is a subtree, we gotta first
+        check if the root node of the subtree is inside the big tree
+        Then check if the entire tree is inside.
+        So we first check for the root node inside the big tee
+        And if its present then check the children iteratively
+        */
+        if(bigroot == null || smallroot == null)
+            return false;
+        
+        if(bigroot == smallroot && subtree(bigroot, smallroot))
+            return true;
+        
+        return isSubset(bigroot.left, smallroot) || isSubset(bigroot.right, smallroot);    
+    }
+    
+    
+    private boolean subtree(Node bigroot, Node smallroot) {
+        if (bigroot == null || smallroot == null)
+            return false;
+        
+        if(bigroot == smallroot)
+            return subtree(bigroot.left, smallroot.left) &&
+            subtree(bigroot.right, smallroot.right);
+        
+        return false;
+    }
+    
     List<LinkedList<Node>> createlistatlevels(Node root){
         List<LinkedList<Node>> master = new ArrayList<LinkedList<Node>>();
         LinkedList<Node> latest = new LinkedList<Node>();
