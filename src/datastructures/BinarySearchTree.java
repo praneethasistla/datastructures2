@@ -35,10 +35,10 @@ public class BinarySearchTree {
     
     void inorder(Node root){
         if(root.left != null)
-            postorder(root.left);
+            inorder(root.left);
         System.out.print("" + root.val);
         if(root.right != null)
-            postorder(root.right);
+            inorder(root.right);
     }
     
     void levelorder(Node root){
@@ -119,7 +119,21 @@ public class BinarySearchTree {
     Node createBinaryTree(Node[] arr){
         return createTree(arr, 0, arr.length-1);
     }
-
+    
+    Node commonAncestor(Node root, Node n1, Node n2){
+        if(root == null || n1 == null || n2 == null)
+            return null;
+        if(root == n1 || root == n2)
+            return root;
+        
+        Node left = commonAncestor(root.left, n1, n2);
+        Node right = commonAncestor(root.right, n1, n2);
+        
+        if(left != null && right != null)
+            return root;
+        return left == null ? right: left;
+    }
+    
     List<LinkedList<Node>> createlistatlevels(Node root){
         List<LinkedList<Node>> master = new ArrayList<LinkedList<Node>>();
         LinkedList<Node> latest = new LinkedList<Node>();
