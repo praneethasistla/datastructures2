@@ -5,6 +5,8 @@
  */
 package datastructures;
 
+import java.util.Queue;
+
 /**
  *
  * @author Praneetha
@@ -37,4 +39,11 @@ public class Graphs {
             if(!marked[neighbours[i]])
                 dfs(neighbours[i]);
     }
+    /*
+    For breadth first search, use a queue.
+    Add the first node to the queue, then start a while loop.
+    while the queue is not empty, dequeue the node and mark it.
+    Then add the node's neighbours to the queue.
+    */
+    
 }

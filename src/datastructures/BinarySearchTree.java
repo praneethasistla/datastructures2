@@ -96,6 +96,26 @@ public class BinarySearchTree {
     boolean isBalanced(Node root){
         return maxdepth(root)-mindepth(root) <= 1;
     }
+    
+    Node createTree(Node[] arr, int start, int end){
+        /*The array is sorted. We need to create a binary tree from that.
+        for a binary search tree, we will need the root to be the dividing 
+        node in terms of the values. Therefore, since the array is sorted, we
+        can split the array into half and create root from there.
+        */
+        if(start>end)
+            return null;
+        
+        Node root = arr[(start+end)/2];
+        root.left = createTree(arr, 0, (start+end)/2 -1);
+        root.right = createTree(arr,(start+end)/2+1, end);
+        
+        return root;
+    }
+    
+    Node createBinaryTree(Node[] arr){
+        return createTree(arr, 0, arr.length-1);
+    }
 
     private static class Node {
         Node left, right;
