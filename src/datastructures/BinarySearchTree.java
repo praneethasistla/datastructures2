@@ -5,6 +5,9 @@
  */
 package datastructures;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -117,6 +120,27 @@ public class BinarySearchTree {
         return createTree(arr, 0, arr.length-1);
     }
 
+    List<LinkedList<Node>> createlistatlevels(Node root){
+        List<LinkedList<Node>> master = new ArrayList<LinkedList<Node>>();
+        LinkedList<Node> latest = new LinkedList<Node>();
+        latest.add(root);
+        
+        LinkedList<Node> parent;
+        while(!latest.isEmpty()){
+            master.add(latest);
+            parent = latest;
+            latest = new LinkedList<Node>();
+            
+            for(Node i: parent){
+                if(i.left != null)
+                    latest.add(i.left);
+                if(i.right != null)
+                    latest.add(i.right);
+            }
+        }
+        return master;
+    }
+    
     private static class Node {
         Node left, right;
         int val;
